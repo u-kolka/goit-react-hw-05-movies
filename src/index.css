@@ -1,5 +1,7 @@
 @import-normalize; /* bring in normalize.css styles */
 
+/* @import css from './' */
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -14,14 +16,25 @@ code {
     monospace;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
 
-     /* <div style= {
-         {
-         height: '100vh',
-           display: 'flex',
-           justifyContent: 'center',
-           alignItems: 'center',
-           fontSize: 40,
-           color: '#010101'
-       }
-     } */
+ul,
+ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}

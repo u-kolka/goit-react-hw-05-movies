@@ -22,8 +22,8 @@ const genres = [
 
 
 export function genersForFilmCard(arrayOfGenersID) {
-  const arrayOfGenres = arrayOfGenersID.map(id => {
-    return genres.find(genre => genre.id === id).name;
+  const arrayOfGenres = arrayOfGenersID.map(({ id }) => {
+    return genres.find(genre => genre.id === id).name
   }).join(', ');
   return arrayOfGenres;
 }

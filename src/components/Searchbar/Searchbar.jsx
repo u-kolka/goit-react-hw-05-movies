@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
+// import css from "./Searchbar.module.css";
 
 export default function Searchbar ({onSearch}) {
     const [query, setQuery] = useState('');
@@ -19,7 +20,7 @@ export default function Searchbar ({onSearch}) {
     };
 
     return (
-        <header className="Searchbar">
+        <header className={css.Searchbar}>
             <form className="SearchForm" onSubmit={handleSubmit}>
                 <input
                     className="SearchForm-input"

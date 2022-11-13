@@ -1,27 +1,23 @@
-
+// import { useParams } from "react-router-dom";
 import { genersForFilmCard } from "components/Genres";
+import { posterParam } from '../../config'
 
-export const MoviesDetailsItem = ({ genres, overview, rating, poster, date, title }) => {
-    const altPosterUrl = 'https://pbs.twimg.com/media/FJt-fidXIAEH-Xc.jpg';
-    const posterParam = {
-        postersUrl: 'https://image.tmdb.org/t/p/',
-        postersSize: 'w780',
-    }
+export function MoviesDetailsItem({ genres, overview, rating, poster, date, title }) {
 
-    const { postersUrl, postersSize } = posterParam;
+    const { postersUrl, altPosterUrl, postersSize } = posterParam;
     const src = (poster === null) ? altPosterUrl : (`${postersUrl+postersSize+poster}`);
     return (
-        <li>
+        <div>
             <img src={src} alt={title} width='250px' height='375px'/>
             <div>
-                <h2>{title} ({date.slice(0, 4)})</h2>
+                <h2>{title} {date.slice(0, 4)}</h2>
                 <p>Rating: {rating.toFixed(1)}</p>
                 <h3>Overview</h3>
                 <p>{overview}</p>
                 <h3>Genres</h3>
                 <p>{genersForFilmCard(genres)}</p>
             </div>
-        </li>
+        </div>
     )
 };
 

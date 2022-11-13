@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 
 
 const navItems = [
-    { href: 'home', text: 'Home' },
+    { href: '', text: 'Home' },
     { href: 'movies', text: 'Movies' },
 ];
 
