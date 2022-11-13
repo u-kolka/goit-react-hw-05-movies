@@ -1,37 +1,32 @@
 import { useState, useEffect } from "react";
-import { Outlet } from "react-router-dom";
+import { useSearchParams, Outlet } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import Searchbar from "components/Searchbar/Searchbar";
 import TheMoviedb from "components/TheMoviedb.API/TheMoviedb.API";
-import { MoviesList } from "components/MovieList/MovieList";
-
+import { MoviesList } from "components/MoviesList/MoviesList";
+import { Section } from "components/Layout/Layout.styled";
 
 const Movies = () => {
-  const [queryMovies, setQueryMovies] = useState('');
-  const [movies, setMovies] = useState([]);
-    // const [page, setPage] = useState(1);   
-
-  const handleFormSubmit = (query) => {
-    if (query === queryMovies) {
-      return toast.info('🦄 Please enter a new word to search.');
-    }
-
-    setQueryMovies(query);
-    // setMovies([]);
-    // setPage(1);
-    // setIsLoading(false);
+  const [movies, setMovies] = useState(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const query = searchParams.get("query");
+  
+  const handleSubmit = e => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    setSearchParams({ query: form.elements.query.value });
+    form.reset();
   };
-    
+
   useEffect(() => {
-    if (queryMovies === '') {
+    if (query === '' || query === null) {
       return;
-    }
-      
+    };
+
     const controller = new AbortController();
     try {
       (async function fetchMovies() {
-        const nextMovies = await TheMoviedb.fetchMoviesByQuery(queryMovies);
-        // console.log(nextMovies)
+        const nextMovies = await TheMoviedb.fetchMoviesByQuery(query);
         setMovies([...nextMovies]);
       })();
     } catch (error) {
@@ -41,17 +36,18 @@ const Movies = () => {
     return () => {
       controller.abort();
     };
+  }, [query]);
 
-  }, [queryMovies]);
-
-    return (
-        <main>
-            <Searchbar onSearch={handleFormSubmit} />
-            <MoviesList movies={movies}></MoviesList>
-            <Outlet></Outlet>
-            <ToastContainer></ToastContainer>
-        </main>
-    )
-}
+  return (
+    <main>
+      <Searchbar value={query} onSubmit={handleSubmit} />
+      <Section>
+        {movies && <MoviesList movies={movies}></MoviesList>}
+        <Outlet></Outlet>
+      </Section>
+      <ToastContainer></ToastContainer>
+    </main>
+  )
+};
 
 export default Movies;

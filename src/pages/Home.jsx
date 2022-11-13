@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import TheMoviedb from "components/TheMoviedb.API/TheMoviedb.API";
-import { MoviesList } from "components/MovieList/MovieList";
+import { MoviesList } from "components/MoviesList/MoviesList";
+import { Section } from "components/Layout/Layout.styled";
 
 const Home = () => {
 
@@ -25,7 +26,9 @@ const Home = () => {
     }, []);
 
     return (
-        <MoviesList trendingStatus={trendingStatus} movies={movies} />
+        <Section>
+            <MoviesList trendingStatus={trendingStatus} movies={movies} />
+        </Section>
     )
 }
 

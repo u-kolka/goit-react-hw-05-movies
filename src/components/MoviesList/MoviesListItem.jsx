@@ -1,12 +1,13 @@
 import { posterParam } from '../../config'
+import { GalleryItem } from "./MoviesList.styled";
 
-export const MoviesListItem = ({key, poster, title, movieId }) => {
+export const MoviesListItem = ({poster, title }) => {
     const { postersUrl, altPosterUrl, postersSize } = posterParam;
     const src = (poster === null) ? altPosterUrl : (`${postersUrl+postersSize+poster}`);
     return (
-        <li>
-            <img src={src} alt={title} width='100px' height='150px'/>
+        <GalleryItem>
+            <img src={src} alt={title} width='100px'/>
             <h2>{title}</h2>
-        </li>
+        </GalleryItem>
     )
 };

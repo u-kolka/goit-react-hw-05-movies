@@ -1,19 +1,15 @@
 import { useState, useEffect } from "react";
-import { useParams, Link, useLocation, Outlet } from "react-router-dom";
+import { useParams, useLocation, Outlet } from "react-router-dom";
 import TheMoviedb from "components/TheMoviedb.API/TheMoviedb.API";
 import { MoviesDetailsItem } from "components/MoviesDetails/MoviesDetailsItem";
+import { MoviesDetailsMore } from "components/MoviesDetails/MoviesDetailsMore";
+import { BackLink } from '../components/BackLink/BackLink'
 
-
-const navItems = [
-    { href: 'cast', text: 'Cast' },
-    { href: 'reviews', text: 'Reviews' },
-];
 
 const MoviesDetails = () => {
   const [movie, setMovie] = useState(null);
   const location = useLocation();
   const {id} = useParams(); 
-  console.log(id)
 
   useEffect(() => {
     const controller = new AbortController();
@@ -38,20 +34,15 @@ const MoviesDetails = () => {
   if (!movie) {
     return null;
   }
-  console.log(location.state.from)
+
   const backLinkHref = location.state?.from ?? `/movies`
-    
-    const { genres, overview, vote_average, poster_path, release_date, title } = movie;
+  const { genres, overview, vote_average, poster_path, release_date, title } = movie;
+
   return (
     <main>
-      <Link to={backLinkHref}>Back</Link>
+      <BackLink to={backLinkHref}>Go back</BackLink>
       <MoviesDetailsItem genres={genres} overview={overview} rating={vote_average} poster={poster_path} date={release_date} title={title}></MoviesDetailsItem>
-      <ul>
-      {navItems.map(({ href, text }) =>
-        <Link key={href} to={href} state={{ id }}>
-          {text} 
-        </ Link>)}
-      </ul>
+      <MoviesDetailsMore id={id}></MoviesDetailsMore>
       <Outlet></Outlet>
     </main>
   );

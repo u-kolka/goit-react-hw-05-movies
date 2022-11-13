@@ -1,7 +1,7 @@
-import { forwardRef, lazy } from "react";
-import { Route, Routes, useParams } from "react-router-dom";
+import { lazy } from "react";
+import { Route, Routes } from "react-router-dom";
 import Home from "pages/Home";
-import { Layout } from "./Layout/Layout";
+import Layout from "./Layout/Layout";
 
 
 const Movies = lazy(() => import('pages/Movies'));
@@ -10,9 +10,6 @@ const Cast = lazy(() => import('pages/Cast'));
 const Reviews = lazy(() => import('pages/Reviews'));
 
 export const App = () => {
-
-
-
   return (
     <>
     <Routes>
@@ -26,7 +23,6 @@ export const App = () => {
         <Route path="*" element={<div>Not found page! Please reload the site!</div>}></Route>
       </Route>
       </Routes>
-
     </>
   );
 };
