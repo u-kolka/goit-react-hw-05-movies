@@ -5,3 +5,7 @@ export const Item = styled.li`
     margin-bottom: 20px;
 }
 `
+export const Text = styled.p`
+margin-left: 200px;
+margin-bottom: 20px;
+`

@@ -13,7 +13,7 @@ async function fetchTrendingMovies(page = 1) {
   }; 
  
   try {
-      const response = await axios.get(BASE_URL + '/trending/movie/day', { params }); 
+    const response = await axios.get(BASE_URL + '/trending/movie/day', { params }); 
     return response.data.results; 
   } catch {
     return Promise.reject(new Error(`No trending movie, please reload the site!`));
@@ -31,8 +31,8 @@ async function fetchMoviesByQuery(query='', page = 1) {
   }; 
  
   try {
-    const response = await axios.get(BASE_URL + '/search/movie', { params }); 
-    return response.data.results; 
+    const response = await axios.get(BASE_URL + '/search/movie', { params });
+    return response.data; 
   } catch {
     return Promise.reject(new Error(`No movies as requested: ${query}`));
   }
@@ -48,7 +48,6 @@ async function fetchMovieByID(id) {
 
   try {
     const response = await axios.get(BASE_URL + `/movie/${id}`, { params })
-    // console.log(response.data)
     return response.data; 
   } catch (error) {
     return Promise.reject(new Error(`No movies as requested: ${id}`));
@@ -65,7 +64,6 @@ async function fetchMovieCredits(id) {
 
   try {
     const response = await axios.get(BASE_URL + `/movie/${id}/credits`, { params })
-    // console.log(response.data)
     return response.data; 
   } catch (error) {
     return Promise.reject(new Error(`No movies as requested: ${id}`));
@@ -82,7 +80,6 @@ async function fetchMovieReviews(id) {
 
   try {
     const response = await axios.get(BASE_URL + `/movie/${id}/reviews`, { params })
-    // console.log(response.data)
     return response.data; 
   } catch (error) {
     return Promise.reject(new Error(`No movies as requested: ${id}`));

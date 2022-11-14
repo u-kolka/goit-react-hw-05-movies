@@ -5,7 +5,7 @@ import { Gallery, Link } from "./MoviesList.styled";
 export const MoviesList = ({ movies }) => {
     const location = useLocation();
 return (
-    <Gallery>
+    <Gallery id='gallery'>
     {movies && movies.map(({ id, poster_path, release_date, title }) => {
         return (
         <Link path='movies' key={id} to={`/movies/${id}`} state={{ from: location}}>

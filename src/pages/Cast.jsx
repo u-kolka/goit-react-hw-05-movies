@@ -3,6 +3,7 @@ import { useLocation  } from "react-router-dom";
 import TheMoviedb from "components/TheMoviedb.API/TheMoviedb.API";
 import { CastList } from "components/CastList/CastList";
 import { Section } from "components/Layout/Layout.styled";
+import { Text } from "components/Reviews/Reviews.styled";
 
 const Cast = () => {
   const [movie, setMovie] = useState(null);
@@ -24,10 +25,11 @@ const Cast = () => {
     };
   }, []);
 
+  if (!movie) return null;
+  console.log(movie)
   return (
-    <Section>
-      {movie && <CastList movie={movie}></CastList>}
-    </Section>
+    movie.cast.length > 0 && <Section><CastList movie={movie}></CastList></Section> ||
+    <Text>We don't have any casts for this movie :( </Text>
   );
 }
 
