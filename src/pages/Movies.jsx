@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { useSearchParams, Outlet } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
+import { useSearchParams } from "react-router-dom";
+import { toast } from 'react-toastify';
+import { StyledContainer } from "components/ToastContainer/ToastContainer.styled";
 import { Pagination } from "components/Pagination/Pagination.styled";
 import Searchbar from "components/Searchbar/Searchbar";
 import TheMoviedb from "components/TheMoviedb.API/TheMoviedb.API";
@@ -32,7 +33,7 @@ const Movies = () => {
 
     return () => {
       controller.abort();
-      
+
     };
   }, [query, page]);
 
@@ -55,23 +56,34 @@ const Movies = () => {
     };
   }, [page])
 
-    const handleSubmit = e => {
+  const handleSubmit = e => {
     e.preventDefault();
     const form = e.currentTarget;
-    setSearchParams({ query: form.elements.query.value });
+    const queryValue = form.elements.query.value.toLowerCase().trim();
+    if (query === queryValue) {
+      return toast.info('🛸 Please enter a new word to search.');
+    }
+
+    setSearchParams({ query: queryValue });
+    setMovies(null);
     setPage(1);
     form.reset();
+
+    if (queryValue === '') {
+      setSearchParams({});
+      return toast.info('🛸 Please enter a word to search.');
+    }
   };
 
-    const handleClick = () => {
-      setPage(prevPage => prevPage + 1);
+  const handleClick = () => {
+    setPage(prevPage => prevPage + 1);
   };
 
   return (
     <main>
-      <Searchbar value={query} onSubmit={handleSubmit} />
+      <Searchbar onSubmit={handleSubmit} />
       <Section>
-        {movies && <>
+        {movies && movies.length > 0 && <>
           <MoviesList movies={movies}></MoviesList>
           <Pagination 
             className="Pagination"
@@ -83,8 +95,8 @@ const Movies = () => {
             pageCount={totalPage}
         ></Pagination>
         </>}
+      <StyledContainer autoClose={3000} theme={"light"} icon={false}></StyledContainer>
       </Section>
-      <ToastContainer></ToastContainer>
     </main>
   )
 };

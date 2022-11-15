@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { posterParam } from '../../config'
 import { CardBox, TextBox } from "../MoviesDetails//MoviesDetails.styled";
 import { Item } from './Reviews.styled';
@@ -25,3 +26,7 @@ export const ReviewsList = ({ movie }) => {
         </ul>
     )
 }
+
+ReviewsList.propTypes = {
+    movie: PropTypes.array.isRequired,
+};

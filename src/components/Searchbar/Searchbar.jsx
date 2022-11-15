@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
 import { SearchForm, SearchFormInput, SearchFormButton } from "./Searchbar.styled";
 
@@ -7,7 +6,7 @@ export default function Searchbar ({onSubmit}) {
     const [query, setQuery] = useState('');
 
     const handleChange = event => {
-        setQuery(event.currentTarget.value.toLowerCase());
+        setQuery(event.currentTarget.value); 
     };
 
     return (
@@ -27,6 +26,6 @@ export default function Searchbar ({onSubmit}) {
     );
 };
 
-// Searchbar.propTypes = {
-//     onSearch: PropTypes.func.isRequired,
-// };
+Searchbar.propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+};

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Link } from "components/MoviesDetails/MoviesDetails.styled";
 import { Title } from "components/MoviesDetails/MoviesDetails.styled";
 
@@ -16,4 +17,9 @@ export const MoviesDetailsMore = ({id}) => {
         </ Link>)}
     </ul>
   </>
-)}
+  )
+}
+
+MoviesDetailsMore.propTypes = {
+    id: PropTypes.string.isRequired,
+};

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useLocation } from "react-router-dom";
 import { MoviesListItem } from "components/MoviesList/MoviesListItem"
 import { Gallery, Link } from "./MoviesList.styled";
@@ -8,9 +9,13 @@ return (
     <Gallery id='gallery'>
     {movies && movies.map(({ id, poster_path, release_date, title }) => {
         return (
-        <Link path='movies' key={id} to={`/movies/${id}`} state={{ from: location}}>
+        <Link to={`/movies/${id}`} key={id} state={{ from: location}}>
             <MoviesListItem poster={poster_path} date={release_date} title={title} />
         </Link>)
     })}
     </Gallery>)
 }
+
+MoviesList.propTypes = {
+    movies: PropTypes.array.isRequired,
+};

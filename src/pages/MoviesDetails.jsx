@@ -5,7 +5,6 @@ import { MoviesDetailsItem } from "components/MoviesDetails/MoviesDetailsItem";
 import { MoviesDetailsMore } from "components/MoviesDetails/MoviesDetailsMore";
 import { BackLink } from '../components/BackLink/BackLink'
 
-
 const MoviesDetails = () => {
   const [movie, setMovie] = useState(null);
   const location = useLocation();

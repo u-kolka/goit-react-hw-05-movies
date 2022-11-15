@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { posterParam } from '../../config'
 import { Gallery } from "../MoviesList/MoviesList.styled";
 import { CardBox, TextBox } from "../MoviesDetails//MoviesDetails.styled";
@@ -21,4 +22,9 @@ export const CastList = ({movie}) => {
             )
       })} 
     </Gallery>
-)}
+    )
+}
+
+CastList.propTypes = {
+    movie: PropTypes.object.isRequired,
+};

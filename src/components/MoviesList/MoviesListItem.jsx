@@ -1,5 +1,6 @@
+import PropTypes from 'prop-types';
 import { posterParam } from '../../config'
-import { GalleryItem } from "./MoviesList.styled";
+import { GalleryItem, Box } from "./MoviesList.styled";
 
 export const MoviesListItem = ({poster, title }) => {
     const { postersUrl, altPosterUrl, postersSize } = posterParam;
@@ -8,8 +9,15 @@ export const MoviesListItem = ({poster, title }) => {
 
     return (
         <GalleryItem>
-            <img src={src} alt={title} width='130px'/>
-            <h2>{name}</h2>
+            <img src={src} alt={title} width='130px' />
+            <Box>
+                <h2>{name}</h2>
+            </Box>
         </GalleryItem>
     )
+};
+
+MoviesListItem.propTypes = {
+    poster: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
 };

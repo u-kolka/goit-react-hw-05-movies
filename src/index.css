@@ -1,5 +1,16 @@
 @import-normalize; /* bring in normalize.css styles */
 
+/* :root {
+  --toastify-spinner-color: rgb(255, 40, 90);
+  --toastify-color-info: rgb(255, 40, 90);
+  --toastify-icon-color-info: var(--toastify-color-info);
+    --toastify-color-progress-info: var(--toastify-color-info);
+        --toastify-color-progress-info: rgb(255, 40, 90);
+}
+.Toastify__progress-bar--info {
+  background-color: rgb(255, 40, 90);;
+} */
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

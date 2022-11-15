@@ -13,7 +13,6 @@ export const Gallery = styled.ul`
 export const GalleryItem = styled.li`
   display: flex;
   align-items: stretch;
-  gap: 12px;
   height: 200px;
   border-radius: 2px;
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
@@ -29,3 +28,7 @@ export const Link = styled(NavLink)`
   color: black;
   font-weight: 500;
 `;
+
+export const Box = styled.div`
+  padding: 10px;
+`

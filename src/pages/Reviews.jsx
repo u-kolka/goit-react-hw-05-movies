@@ -26,7 +26,7 @@ const Reviews = () => {
   }, []);
   
   if (!movie) return null;
-  console.log(movie)
+
   return (
     movie.results.length === 0 && <Text>We don't have any reviews for this movie :( </Text> ||
     movie.results.length > 0 &&

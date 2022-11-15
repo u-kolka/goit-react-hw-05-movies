@@ -1,4 +1,4 @@
-// import { useParams } from "react-router-dom";
+import PropTypes from 'prop-types';
 import { genersForFilmCard } from "components/Genres";
 import { posterParam } from '../../config'
 import { CardBox, TextBox } from "./MoviesDetails.styled";
@@ -22,8 +22,11 @@ export function MoviesDetailsItem({ genres, overview, rating, poster, date, titl
     )
 };
 
-    // ImageGalleryItem.propTypes = {
-    //     image: PropTypes.string.isRequired,
-    //     modalImage: PropTypes.string.isRequired,
-    //     tags: PropTypes.string.isRequired,
-    // }
+MoviesDetailsItem.propTypes = {
+    genres: PropTypes.array.isRequired,
+    overview: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    poster: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+};
