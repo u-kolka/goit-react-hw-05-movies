@@ -79,7 +79,7 @@ const Movies = () => {
   const handleClick = () => {
     setPage(prevPage => prevPage + 1);
   };
-console.log(movies)
+
   return (
     <main>
       <Searchbar onSubmit={handleSubmit} />
