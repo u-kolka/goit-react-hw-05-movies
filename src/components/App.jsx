@@ -3,7 +3,6 @@ import { Route, Routes } from "react-router-dom";
 import Home from "pages/Home";
 import Layout from "./Layout/Layout";
 import { NotFound } from "./NotFound/NotFound";
-import { ToastContainer, toast } from 'react-toastify';
 
 const Movies = lazy(() => import('pages/Movies'));
 const MoviesDetails = lazy(() => import('pages/MoviesDetails'));

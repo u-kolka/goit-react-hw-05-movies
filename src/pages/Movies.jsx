@@ -24,6 +24,10 @@ const Movies = () => {
     try {
       (async function fetchMovies() {
         const nextMovies = await TheMoviedb.fetchMoviesByQuery(query, page);
+        if (nextMovies.results.length === 0) {
+          return toast.info('🛸 Search result not successful. Enter the correct movie name.');
+        }
+        console.log(nextMovies)
         setMovies([...nextMovies.results]);
         setTotalPage(nextMovies.total_pages)
       })();
@@ -33,42 +37,39 @@ const Movies = () => {
 
     return () => {
       controller.abort();
-
     };
   }, [query, page]);
 
   useEffect(() => {
-    if (movies === null) {
-      return;
-    };
-    
+    if (movies) {
     const timerId = setTimeout(() => {
-      const galleryHeight = document.getElementById('gallery').clientHeight
+      const galleryHeight = document.getElementById('gallery')?.clientHeight
       window.scrollBy({
         top: -galleryHeight,
         left: 0,
         behavior: 'smooth'
       });
-    }, 250);
-        
+    }, 200);
+      
     return () => {
       clearTimeout(timerId);
     };
-  }, [page])
+    };
+  }, [page, movies])
 
   const handleSubmit = e => {
     e.preventDefault();
     const form = e.currentTarget;
     const queryValue = form.elements.query.value.toLowerCase().trim();
-    if (query === queryValue) {
-      return toast.info('🛸 Please enter a new word to search.');
-    }
 
     setSearchParams({ query: queryValue });
     setMovies(null);
     setPage(1);
     form.reset();
 
+    if (query === queryValue) {
+      return toast.info('🛸 Please enter a new word to search.');
+    }
     if (queryValue === '') {
       setSearchParams({});
       return toast.info('🛸 Please enter a word to search.');
@@ -78,7 +79,7 @@ const Movies = () => {
   const handleClick = () => {
     setPage(prevPage => prevPage + 1);
   };
-
+console.log(movies)
   return (
     <main>
       <Searchbar onSubmit={handleSubmit} />

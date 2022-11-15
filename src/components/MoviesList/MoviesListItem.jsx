@@ -18,6 +18,6 @@ export const MoviesListItem = ({poster, title }) => {
 };
 
 MoviesListItem.propTypes = {
-    poster: PropTypes.string.isRequired,
+    poster: PropTypes.string,
     title: PropTypes.string.isRequired,
 };

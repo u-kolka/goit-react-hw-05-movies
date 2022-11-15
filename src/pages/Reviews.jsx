@@ -23,16 +23,13 @@ const Reviews = () => {
     return () => {
       controller.abort()
     };
-  }, []);
+  }, [MovieId]);
   
   if (!movie) return null;
 
   return (
-    movie.results.length === 0 && <Text>We don't have any reviews for this movie :( </Text> ||
-    movie.results.length > 0 &&
-    <Section>
-      <ReviewsList movie={movie.results}></ReviewsList>
-    </Section>
+    movie.results.length > 0 ? <Section><ReviewsList movie={movie.results}></ReviewsList></Section> :
+      <Text>We don't have any reviews for this movie :( </Text> 
   );
 }
 
