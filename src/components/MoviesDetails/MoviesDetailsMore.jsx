@@ -9,7 +9,7 @@ const navItems = [
 
 export const MoviesDetailsMore = ({id}) => {
   return (<>
-      <Title>Aadditional information</Title>
+      <Title>Additional information</Title>
     <ul>
       {navItems.map(({ href, text }) =>
         <Link key={href} to={href} state={{ id }}>
