@@ -26,7 +26,7 @@ const Cast = () => {
   }, [MovieId]);
 
   if (!movie) return null;
-  // console.log(movie)
+
   return (
     movie.cast.length > 0 ? <Section><CastList movie={movie}></CastList></Section> :
     <Text>We don't have any casts for this movie :( </Text>

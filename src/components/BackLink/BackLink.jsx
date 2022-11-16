@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
-import { Link } from "components/MoviesDetails/MoviesDetails.styled";
+import { StyledLink } from './BackLink.styled';
 
 export const BackLink = ({to, children }) => {
 
   return (
-    <Link to={to}>
+    <StyledLink to={to}>
       {children}
-    </Link>
+    </StyledLink>
   );
 };
 

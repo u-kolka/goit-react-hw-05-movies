@@ -1,13 +1,11 @@
-import { useState, useEffect } from "react";
-import { useParams, useLocation, Outlet } from "react-router-dom";
+import { useState, useEffect, Suspense } from "react";
+import { useParams, Outlet } from "react-router-dom";
 import TheMoviedb from "components/TheMoviedb.API/TheMoviedb.API";
 import { MoviesDetailsItem } from "components/MoviesDetails/MoviesDetailsItem";
 import { MoviesDetailsMore } from "components/MoviesDetails/MoviesDetailsMore";
-import { BackLink } from '../components/BackLink/BackLink'
 
 const MoviesDetails = () => {
   const [movie, setMovie] = useState(null);
-  const location = useLocation();
   const {id} = useParams(); 
 
   useEffect(() => {
@@ -34,15 +32,16 @@ const MoviesDetails = () => {
     return null;
   }
 
-  const backLinkHref = location.state?.from ?? `/movies`
+
   const { genres, overview, vote_average, poster_path, release_date, title } = movie;
 
   return (
     <main>
-      <BackLink to={backLinkHref}>Go back</BackLink>
       <MoviesDetailsItem genres={genres} overview={overview} rating={vote_average} poster={poster_path} date={release_date} title={title}></MoviesDetailsItem>
       <MoviesDetailsMore id={id}></MoviesDetailsMore>
-      <Outlet></Outlet>
+      <Suspense>
+        <Outlet></Outlet>
+      </Suspense>
     </main>
   );
 };

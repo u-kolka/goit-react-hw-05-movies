@@ -6,7 +6,8 @@ import { CardBox, TextBox } from "./MoviesDetails.styled";
 export function MoviesDetailsItem({ genres, overview, rating, poster, date, title }) {
 
     const { postersUrl, altPosterUrl, postersSize } = posterParam;
-    const src = (poster === null) ? altPosterUrl : (`${postersUrl+postersSize+poster}`);
+    const src = (poster === null) ? altPosterUrl : (`${postersUrl + postersSize + poster}`);
+    
     return (
         <CardBox>
             <img src={src} alt={title} width='250px' height='375px'/>
@@ -26,7 +27,7 @@ MoviesDetailsItem.propTypes = {
     genres: PropTypes.array.isRequired,
     overview: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
-    poster: PropTypes.string.isRequired,
+    poster: PropTypes.string,
     date: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
 };

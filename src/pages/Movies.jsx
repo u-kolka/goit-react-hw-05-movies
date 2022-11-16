@@ -9,17 +9,17 @@ import { MoviesList } from "components/MoviesList/MoviesList";
 import { Section } from "components/Layout/Layout.styled";
 
 const Movies = () => {
-  const [movies, setMovies] = useState(null);
-  const [page, setPage] = useState(1);  
+  const [movies, setMovies] = useState(null); 
   const [totalPage, setTotalPage] = useState(0); 
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get("query");
+  const page = searchParams.get("page");
+
 
   useEffect(() => {
     if (query === '' || query === null) {
       return;
     };
-
     const controller = new AbortController();
     try {
       (async function fetchMovies() {
@@ -27,7 +27,7 @@ const Movies = () => {
         if (nextMovies.results.length === 0) {
           return toast.info('🛸 Search result not successful. Enter the correct movie name.');
         }
-        console.log(nextMovies)
+
         setMovies([...nextMovies.results]);
         setTotalPage(nextMovies.total_pages)
       })();
@@ -50,7 +50,7 @@ const Movies = () => {
         behavior: 'smooth'
       });
     }, 200);
-      
+
     return () => {
       clearTimeout(timerId);
     };
@@ -60,11 +60,10 @@ const Movies = () => {
   const handleSubmit = e => {
     e.preventDefault();
     const form = e.currentTarget;
-    const queryValue = form.elements.query.value.toLowerCase().trim();
+    const queryValue = form.elements.query.value.trim();
 
     setSearchParams({ query: queryValue });
     setMovies(null);
-    setPage(1);
     form.reset();
 
     if (query === queryValue) {
@@ -76,26 +75,27 @@ const Movies = () => {
     }
   };
 
-  const handleClick = () => {
-    setPage(prevPage => prevPage + 1);
+  const handleClick = (page) => {
+    const nextPage = Number(page.selected) + 1;
+    setSearchParams({ query, page: nextPage});
   };
 
   return (
     <main>
-      <Searchbar onSubmit={handleSubmit} />
+      <Searchbar onSubmit={handleSubmit} value={query} />
       <Section>
-        {movies && movies.length > 0 && <>
-          <MoviesList movies={movies}></MoviesList>
-          <Pagination 
+        {movies && movies.length > 0 &&
+          <MoviesList movies={movies}></MoviesList>}
+          {totalPage > 1 &&
+          <Pagination
+            onPageChange={handleClick}
             className="Pagination"
             previousLabel="<"
             breakLabel="..."
             nextLabel=">"
-            onClick={handleClick}
             pageRangeDisplayed={3}
             pageCount={totalPage}
-        ></Pagination>
-        </>}
+        ></Pagination>}
       <StyledContainer autoClose={3000} theme={"light"} icon={false}></StyledContainer>
       </Section>
     </main>
