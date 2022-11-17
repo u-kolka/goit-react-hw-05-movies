@@ -20,7 +20,7 @@ async function fetchTrendingMovies(page = 1) {
   }
 };
 
-async function fetchMoviesByQuery(query='', page = 1) {
+async function fetchMoviesByQuery(query='', page) {
   const controller = new AbortController();
   const params = {
     api_key: `${API_KEY}`,
