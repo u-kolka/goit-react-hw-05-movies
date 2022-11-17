@@ -1,7 +1,7 @@
 import ReactPaginate from 'react-paginate';
 import styled from "styled-components"
 
-export const Pagination = styled(ReactPaginate)`
+export const MyPagin = styled(ReactPaginate)`
     display: flex;
     justify-content: center;
     gap: 10px;

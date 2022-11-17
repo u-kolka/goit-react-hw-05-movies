@@ -2,18 +2,19 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { toast } from 'react-toastify';
 import { StyledContainer } from "components/ToastContainer/ToastContainer.styled";
-import { Pagination } from "components/Pagination/Pagination.styled";
+import { MyPagin } from "components/Pagination/Pagination.styled";
 import Searchbar from "components/Searchbar/Searchbar";
 import TheMoviedb from "components/TheMoviedb.API/TheMoviedb.API";
 import { MoviesList } from "components/MoviesList/MoviesList";
 import { Section } from "components/Layout/Layout.styled";
+
 
 const Movies = () => {
   const [movies, setMovies] = useState(null); 
   const [totalPage, setTotalPage] = useState(0); 
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get("query");
-  const page = searchParams.get("page");
+  const page = Number(searchParams.get("page")) || 1;
 
 
   useEffect(() => {
@@ -87,7 +88,7 @@ const Movies = () => {
         {movies && movies.length > 0 &&
           <MoviesList movies={movies}></MoviesList>}
           {totalPage > 1 &&
-          <Pagination
+          <MyPagin
             onPageChange={handleClick}
             className="Pagination"
             previousLabel="<"
@@ -95,7 +96,8 @@ const Movies = () => {
             nextLabel=">"
             pageRangeDisplayed={3}
             pageCount={totalPage}
-        ></Pagination>}
+            forcePage={page - 1}
+          ></MyPagin>}
       <StyledContainer autoClose={3000} theme={"light"} icon={false}></StyledContainer>
       </Section>
     </main>
