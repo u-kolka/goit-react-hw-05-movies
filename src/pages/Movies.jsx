@@ -87,7 +87,7 @@ const Movies = () => {
       <Section>
         {movies && movies.length > 0 &&
           <MoviesList movies={movies}></MoviesList>}
-          {totalPage > 1 &&
+          {movies && totalPage > 1 &&
           <MyPagin
             onPageChange={handleClick}
             className="Pagination"
